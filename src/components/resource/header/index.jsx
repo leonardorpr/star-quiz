@@ -1,4 +1,8 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { push } from 'connected-react-router';
+
 import {
   Navbar, NavbarBrand, Nav, NavItem, NavLink, NavbarToggler, Collapse,
 } from 'reactstrap';
@@ -6,8 +10,10 @@ import { logo } from 'assets/brands';
 
 import styles from './styles';
 
-const Header = ({ className }) => {
+const Header = ({ className, pushToRoute }) => {
   const [open, setOpen] = useState(false);
+
+  const redirectToRoute = route => pushToRoute(`/${route}`);
 
   return (
     <div className={className}>
@@ -21,13 +27,13 @@ const Header = ({ className }) => {
         <NavbarToggler onClick={() => setOpen(prevOpen => !prevOpen)} className="mr-2" />
         <Collapse isOpen={open} navbar>
           <Nav className="ml-auto" navbar>
-            <NavItem>
+            <NavItem onClick={() => redirectToRoute('')}>
               <NavLink className="nav-link">Home</NavLink>
             </NavItem>
-            <NavItem>
+            <NavItem onClick={() => redirectToRoute('about')}>
               <NavLink className="nav-link">About</NavLink>
             </NavItem>
-            <NavItem>
+            <NavItem onClick={() => redirectToRoute('ranking')}>
               <NavLink className="nav-link">Ranking</NavLink>
             </NavItem>
           </Nav>
@@ -37,4 +43,11 @@ const Header = ({ className }) => {
   );
 };
 
-export default styles(Header);
+const mapDispatchToProps = dispatch => ({
+  pushToRoute: bindActionCreators(push, dispatch),
+});
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(styles(Header));
