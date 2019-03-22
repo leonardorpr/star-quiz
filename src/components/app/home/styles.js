@@ -3,6 +3,10 @@ import styled from 'styled-components';
 export default c => styled(c)`
   .wrapper {
     height: 100vh;
+  }
+
+  .centralize-content {
+    height: 90%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -23,5 +27,6 @@ export default c => styled(c)`
   .button-body {
     width: 150px;
     height: 50px;
+    text-transform: uppercase;
   }
 `;
