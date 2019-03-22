@@ -22,13 +22,13 @@ const Header = ({ className }) => {
         <Collapse isOpen={open} navbar>
           <Nav className="ml-auto" navbar>
             <NavItem>
-              <NavLink>Home</NavLink>
+              <NavLink className="nav-link">Home</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink>About</NavLink>
+              <NavLink className="nav-link">About</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink>Ranking</NavLink>
+              <NavLink className="nav-link">Ranking</NavLink>
             </NavItem>
           </Nav>
         </Collapse>

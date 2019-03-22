@@ -11,4 +11,8 @@ export default c => styled(c)`
     color: rgba(255, 255, 255, 0.5);
     font-weight: bolder;
   }
+
+  .nav-link {
+    font-weight: bolder;
+  }
 `;
