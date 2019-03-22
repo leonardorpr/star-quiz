@@ -4,7 +4,6 @@ import styles from './styles';
 
 const Game = ({ className }) => (
   <div className={className}>
-    <div className="container">Game</div>
     <CountDown />
   </div>
 );
