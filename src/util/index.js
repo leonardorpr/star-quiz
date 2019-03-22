@@ -1,1 +1,3 @@
-// Utilitarian functions for the project
+import If from './if';
+
+export { If };
