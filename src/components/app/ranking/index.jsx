@@ -1,6 +1,6 @@
 import React from 'react';
-import { Button, Table } from 'reactstrap';
-import { Header } from 'components/resource';
+import { Table } from 'reactstrap';
+import { Header, Button } from 'components/resource';
 
 import styles from './styles';
 
@@ -35,9 +35,7 @@ const Ranking = ({ className }) => (
           </Table>
         </div>
 
-        <Button className="button-body" color="warning">
-          Start Game
-        </Button>
+        <Button color="warning" label="Start Game" />
       </div>
     </div>
   </div>

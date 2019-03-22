@@ -1,6 +1,5 @@
 import React from 'react';
-import { Button } from 'reactstrap';
-import { Header } from 'components/resource';
+import { Header, Button } from 'components/resource';
 import { logo } from 'assets/brands';
 
 import styles from './styles';
@@ -12,9 +11,7 @@ const Home = ({ className }) => (
       <div className="centralize-content">
         <img src={logo} alt="Darth Vader brand" className="logo-body" />
         <p className="letter-body">StarQuiz</p>
-        <Button className="button-body" color="warning">
-          Start
-        </Button>
+        <Button color="warning" label="Start" route="about" />
       </div>
     </div>
   </div>

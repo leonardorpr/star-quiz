@@ -23,10 +23,4 @@ export default c => styled(c)`
     font-weight: bolder;
     font-size: 50px;
   }
-
-  .button-body {
-    width: 150px;
-    height: 50px;
-    text-transform: uppercase;
-  }
 `;

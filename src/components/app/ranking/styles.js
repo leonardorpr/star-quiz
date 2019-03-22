@@ -24,13 +24,6 @@ export default c => styled(c)`
     font-size: 50px;
   }
 
-  .button-body {
-    width: 150px;
-    height: 50px;
-    text-transform: uppercase;
-    margin-bottom: 20px;
-  }
-
   .titles {
     font-weight: bolder;
   }

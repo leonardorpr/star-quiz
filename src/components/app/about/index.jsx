@@ -1,6 +1,5 @@
 import React from 'react';
-import { Button } from 'reactstrap';
-import { Header } from 'components/resource';
+import { Header, Button } from 'components/resource';
 
 import styles from './styles';
 
@@ -44,9 +43,7 @@ const About = ({ className }) => (
           </div>
         </div>
 
-        <Button className="button-body" color="warning">
-          Start Game
-        </Button>
+        <Button color="warning" label="Start Game" />
       </div>
     </div>
   </div>
