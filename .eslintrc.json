@@ -20,7 +20,8 @@
     "class-methods-use-this": "off",
     "no-underscore-dangle": "off",
     "react/prop-types": "off",
-    "react/no-unescaped-entities": "off"
+    "react/no-unescaped-entities": "off",
+    "react/jsx-one-expression-per-line": "off"
   },
   "settings": {
     "import/resolver": {
