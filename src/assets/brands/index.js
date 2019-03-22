@@ -1,1 +1,3 @@
-// Adding your images & brands here
+import logo from './logo.png';
+
+export { logo };

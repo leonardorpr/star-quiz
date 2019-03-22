@@ -1,1 +1,3 @@
-// Resources that can be used throughout the project
+import Header from './header';
+
+export { Header };
