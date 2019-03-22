@@ -12,7 +12,7 @@ const Header = ({ className }) => {
   return (
     <div className={className}>
       <Navbar color="dark" dark expand="md">
-        <NavbarBrand href="/">
+        <NavbarBrand>
           <>
             <img src={logo} alt="Darth Vader brand" className="logo" />
             <span className="letter-logo">StarQuiz</span>

@@ -14,5 +14,6 @@ export default c => styled(c)`
 
   .nav-link {
     font-weight: bolder;
+    cursor: pointer;
   }
 `;
