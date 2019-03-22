@@ -16,7 +16,7 @@ const Buttons = ({
       <Button
         className={`button-body ${additionalClassName}`}
         color={color}
-        onClick={() => redirectTo(route)}
+        onClick={() => redirectTo()}
       >
         {label}
       </Button>

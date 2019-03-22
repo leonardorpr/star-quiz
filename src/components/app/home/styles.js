@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export default c => styled(c)`
   .wrapper {
     height: 100vh;
+    background-color: #fcfcfc;
   }
 
   .centralize-content {
