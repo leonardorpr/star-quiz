@@ -42,7 +42,12 @@ const About = ({ className }) => (
           </div>
         </div>
 
-        <Button color="warning" label="Start Game" additionalClassName="clear-button" />
+        <Button
+          color="warning"
+          label="Start Game"
+          route="game"
+          additionalClassName="clear-button"
+        />
       </div>
     </div>
   </div>

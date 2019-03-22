@@ -34,7 +34,7 @@ const Ranking = ({ className }) => (
           </Table>
         </div>
 
-        <Button color="warning" label="Start Game" />
+        <Button color="warning" label="Start Game" route="game" />
       </div>
     </div>
   </div>

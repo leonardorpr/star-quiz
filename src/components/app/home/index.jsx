@@ -10,7 +10,7 @@ const Home = ({ className }) => (
       <div className="centralize-content">
         <img src={logo} alt="Darth Vader brand" className="logo-body" />
         <p className="letter-body">StarQuiz</p>
-        <Button color="warning" label="Start" route="about" />
+        <Button color="warning" label="Start" route="game" />
       </div>
     </div>
   </div>
