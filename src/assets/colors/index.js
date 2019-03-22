@@ -1,1 +1,3 @@
-// Create your color palette in this file
+export default {
+  background: '#fcfcfc',
+};

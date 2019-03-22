@@ -1,9 +1,10 @@
 import styled from 'styled-components';
+import colors from 'assets/colors';
 
 export default c => styled(c)`
   .wrapper {
     height: 100vh;
-    background-color: #fcfcfc;
+    background-color: ${colors.background};
   }
 
   @media (max-width: 425px) {
