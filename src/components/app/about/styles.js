@@ -3,7 +3,7 @@ import colors from 'assets/colors';
 
 export default c => styled(c)`
   .wrapper {
-    height: 100vh;
+    height: 90vh;
     background-color: ${colors.background};
   }
 
@@ -11,10 +11,14 @@ export default c => styled(c)`
     .wrapper {
       height: auto;
     }
+
+    .clear-button {
+      margin-bottom: 10px;
+    }
   }
 
   .centralize-content {
-    height: 90%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;

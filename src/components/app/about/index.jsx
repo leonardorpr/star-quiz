@@ -1,12 +1,11 @@
 import React from 'react';
-import { Header, Button } from 'components/resource';
+import { Button } from 'components/resource';
 
 import styles from './styles';
 
 const About = ({ className }) => (
   <div className={className}>
     <div className="wrapper">
-      <Header />
       <div className="centralize-content">
         <div className="container mt-2 mb-4">
           <div>
@@ -43,7 +42,7 @@ const About = ({ className }) => (
           </div>
         </div>
 
-        <Button color="warning" label="Start Game" />
+        <Button color="warning" label="Start Game" additionalClassName="clear-button" />
       </div>
     </div>
   </div>
