@@ -1,15 +1,25 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Creators as CreatorsGame } from 'core/store/ducks/game';
 import { push } from 'connected-react-router';
 import { Button } from 'reactstrap';
 
 import styles from './styles';
 
 const Buttons = ({
-  className, label, color, additionalClassName, pushToRoute, route,
+  className,
+  label,
+  color,
+  additionalClassName,
+  pushToRoute,
+  route,
+  resetScore,
 }) => {
-  const redirectTo = () => pushToRoute(`/${route}`);
+  const redirectTo = () => {
+    resetScore();
+    pushToRoute(`/${route}`);
+  };
 
   return (
     <div className={className}>
@@ -26,6 +36,7 @@ const Buttons = ({
 
 const mapDispatchToProps = dispatch => ({
   pushToRoute: bindActionCreators(push, dispatch),
+  resetScore: bindActionCreators(CreatorsGame.resetScore, dispatch),
 });
 
 export default connect(

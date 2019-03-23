@@ -18,6 +18,7 @@ class Game extends Component {
   }
 
   componentDidMount() {
+    this.props.resetScore();
     this.props.fetchCharacters();
   }
 
@@ -71,6 +72,7 @@ const mapStateToProps = ({ game }) => ({ game });
 
 const mapDispatchToProps = dispatch => ({
   fetchCharacters: bindActionCreators(CreatorsGame.fetchCharacters, dispatch),
+  resetScore: bindActionCreators(CreatorsGame.resetScore, dispatch),
   loadMore: bindActionCreators(CreatorsGame.loadMore, dispatch),
 });
 
