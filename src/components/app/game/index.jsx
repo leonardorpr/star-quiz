@@ -17,9 +17,9 @@ class Game extends Component {
     const { game } = this.props;
 
     if (game.characters) {
-      const characters = game.characters.map(() => (
-        <div className="col-sm-12 col-md-4">
-          <Card />
+      const characters = game.characters.map((character, index) => (
+        <div key={index} className="col-sm-12 col-md-4">
+          <Card image={character.image} informations={character} />
         </div>
       ));
 

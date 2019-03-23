@@ -3,17 +3,6 @@ class BaseRepository {
     this.mService = this.getServiceProvider();
   }
 
-  post = async (params) => {
-    const serviceObject = params.getServiceObject ? params.getServiceObject() : params;
-    const serviceResult = await this.mService.create(serviceObject);
-
-    if (serviceResult.success) {
-      serviceResult.data = serviceResult.data.map(model => this.modelToEntity(model));
-    }
-
-    return serviceResult;
-  };
-
   get = async () => {
     const result = await this.mService.list();
 
@@ -33,8 +22,9 @@ class BaseRepository {
       return result;
     }
 
-    const entitiesPromises = result.data.results.map(model => this.modelToEntity(model));
-    result.data = await Promise.all(entitiesPromises);
+    const data = this.modelToEntity(result.data);
+    result.data = data;
+
     return result;
   };
 

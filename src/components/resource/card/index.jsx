@@ -1,21 +1,41 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+import { Creators as CreatorsGame } from 'core/store/ducks/game';
+
+import { If } from 'util';
+
 import {
   Card, CardImg, CardBody, Button, Input,
 } from 'reactstrap';
 import MaterialIcon from 'material-icons-react';
 import { Modal } from 'components/resource';
-import { If } from 'util';
+
 import styles from './styles';
 
-const GameCard = ({ className }) => {
+const GameCard = ({
+  className, image, informations, handleScore,
+}) => {
   const [toggle, setToggle] = useState(false);
-  const [guessField, setGuessField] = useState(false);
-  const [guess, setGuess] = useState('');
+  const [guess, setGuess] = useState({ field: '', answered: false, openField: false });
+  const [tip, setTip] = useState(false);
+
+  const sendGuess = () => {
+    setGuess(prevGuess => ({ ...prevGuess, answered: true }));
+
+    const compare = informations.name.toLowerCase() === guess.field.toLowerCase();
+    const score = tip ? 5 : 10;
+
+    if (compare) {
+      handleScore(score);
+    }
+  };
 
   const handleRenderIcon = () => {
-    if (guess.length > 0) {
+    if (guess.field.length > 0) {
       return (
-        <div className="col-md-1 action-icons">
+        <div className="col-md-1 action-icons" onClick={() => sendGuess()}>
           <MaterialIcon icon="check" size={25} color="#000" />
         </div>
       );
@@ -24,54 +44,77 @@ const GameCard = ({ className }) => {
     return null;
   };
 
+  const handleToggle = () => {
+    setTip(true);
+    setToggle(prevToggle => !prevToggle);
+  };
+
+  const handleFieldChange = value => setGuess(prevGuess => ({ ...prevGuess, field: value }));
+
   return (
     <div className={className}>
       <div className="game-card">
         <Card>
-          <CardImg
-            top
-            width="100%"
-            src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180"
-            alt="Character Image"
-          />
+          <CardImg top width="100%" src={image} alt="Character Image" />
           <CardBody>
-            <If test={!guessField}>
+            <If test={!guess.answered}>
+              <If test={!guess.openField}>
+                <Button
+                  size="lg"
+                  block
+                  className="button-who-am-i"
+                  onClick={() => setGuess(prevGuess => ({ ...prevGuess, openField: true }))}
+                >
+                  Who am I
+                </Button>
+              </If>
+              <If test={guess.openField}>
+                <div className="row guess-field">
+                  <div className={guess.field.length > 0 ? 'col-md-10' : 'col-md-12'}>
+                    <Input
+                      type="text"
+                      placeholder="Who am I?"
+                      onChange={event => handleFieldChange(event.target.value)}
+                      value={guess.field}
+                    />
+                  </div>
+                  {handleRenderIcon()}
+                </div>
+              </If>
               <Button
+                className="button-see-more"
                 size="lg"
                 block
-                className="button-who-am-i"
-                onClick={() => setGuessField(true)}
+                onClick={() => handleToggle()}
               >
-                Who am I
+                See more
               </Button>
             </If>
-            <If test={guessField}>
-              <div className="row guess-field">
-                <div className={guess.length > 0 ? 'col-md-10' : 'col-md-12'}>
-                  <Input
-                    type="text"
-                    placeholder="Who am I?"
-                    onChange={event => setGuess(event.target.value)}
-                    value={guess}
-                  />
-                </div>
-                {handleRenderIcon()}
-              </div>
+
+            <If test={guess.answered}>
+              <Button
+                className="button-see-more"
+                size="lg"
+                block
+                disabled
+              >
+                Answered (:
+              </Button>
             </If>
-            <Button
-              className="button-see-more"
-              size="lg"
-              block
-              onClick={() => setToggle(prevToggle => !prevToggle)}
-            >
-              See more
-            </Button>
           </CardBody>
         </Card>
-        <Modal open={toggle} toggle={() => setToggle(prevToggle => !prevToggle)} />
+        <Modal
+          open={toggle}
+          toggle={() => handleToggle()}
+          informations={informations}
+        />
       </div>
     </div>
   );
 };
 
-export default styles(GameCard);
+const mapDispatchToProps = dispatch => ({
+  handleScore: bindActionCreators(CreatorsGame.handleScore, dispatch),
+});
+
+export default connect(null, mapDispatchToProps)(styles(GameCard));

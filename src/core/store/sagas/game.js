@@ -16,9 +16,12 @@ export function* getCharacters() {
 
 export function* getDetails(action) {
   try {
-    const response = yield call(GameRepository.details, action.details);
+    const response = yield call(GameRepository.details, action.information);
 
-    yield put({ type: Types.SUCCESS_FETCH_DETAILS, payload: response });
+    yield put({
+      type: Types.SUCCESS_FETCH_DETAILS,
+      payload: { openDetail: true, key: action.key, data: response },
+    });
   } catch (err) {
     yield put({ type: Types.FAILURE_FETCH_DETAILS });
   }

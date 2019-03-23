@@ -1,8 +1,19 @@
+import { CharacterImage } from 'util';
 import BaseEntity from './base';
 
 class GameEntity extends BaseEntity {
-  defaultParams() {
-    return {};
+  async getCharacterImage() {
+    const image = await CharacterImage(this.name);
+
+    return image;
+  }
+
+  async defaultParams() {
+    // const image = await this.getCharacterImage();
+
+    return {
+      // image,
+    };
   }
 }
 

@@ -1,13 +1,15 @@
 import { createActions, createReducer } from 'reduxsauce';
+import { FormatDetails } from 'util';
 
 // Action types & creators
 export const { Types, Creators } = createActions({
   fetchCharacters: [],
   failureFetchCharacters: [],
   successFetchCharacters: ['characters'],
-  fetchDetails: ['url'],
+  fetchDetails: ['information', 'key'],
   failureFetchDetails: [],
   successFetchDetails: ['details'],
+  resetDetails: [],
   handleScore: ['score'],
   resetScore: [],
 });
@@ -16,7 +18,11 @@ export const { Types, Creators } = createActions({
 const INITIAL_STATE = {
   loading: false,
   characters: [],
-  details: {},
+  details: {
+    films: '',
+    species: '',
+    vehicles: '',
+  },
   score: 0,
   isPlaying: false,
   error: false,
@@ -32,18 +38,36 @@ const successCharacters = (state = INITIAL_STATE, action) => ({
   characters: [...action.payload.data],
 });
 
-const failureCharacters = () => ({ loading: false, error: true });
+const failureCharacters = (state = INITIAL_STATE) => ({
+  ...state,
+  loading: false,
+  error: true,
+});
 
 // Handlers Details
 const details = (state = INITIAL_STATE) => ({ ...state, loading: true });
 
-const successDetails = action => ({
+const successDetails = (state = INITIAL_STATE, action) => ({
+  ...state,
   loading: false,
   error: false,
-  details: [...action.payload],
+  openDetails: action.payload.openDetail,
+  details: {
+    ...state.details,
+    [action.payload.key]: FormatDetails(state.details, action.payload),
+  },
 });
 
-const failureDetails = () => ({ loading: false, error: true });
+const failureDetails = (state = INITIAL_STATE) => ({
+  ...state,
+  loading: false,
+  error: true,
+});
+
+const resetDetails = (state = INITIAL_STATE) => ({
+  ...state,
+  details: {},
+});
 
 // Handlers Score
 const score = (state = INITIAL_STATE, action) => ({
@@ -51,7 +75,11 @@ const score = (state = INITIAL_STATE, action) => ({
   score: state.score + action.payload.score,
 });
 
-const reset = (state = INITIAL_STATE) => ({ ...state, score: 0, isPlaying: false });
+const reset = (state = INITIAL_STATE) => ({
+  ...state,
+  score: 0,
+  isPlaying: false,
+});
 
 // Reducer
 export default createReducer(INITIAL_STATE, {
@@ -61,6 +89,7 @@ export default createReducer(INITIAL_STATE, {
   [Types.FETCH_DETAILS]: details,
   [Types.SUCCESS_FETCH_DETAILS]: successDetails,
   [Types.FAILURE_FETCH_DETAILS]: failureDetails,
+  [Types.RESET_DETAILS]: resetDetails,
   [Types.HANDLE_SCORE]: score,
   [Types.RESET_SCORE]: reset,
 });
