@@ -26,6 +26,18 @@ class BaseRepository {
     return result;
   };
 
+  getDetails = async (url) => {
+    const result = await this.mService.details(url);
+
+    if (!result.success) {
+      return result;
+    }
+
+    const entitiesPromises = result.data.map(model => this.modelToEntity(model));
+    result.data = await Promise.all(entitiesPromises);
+    return result;
+  };
+
   modelToEntity = model => model;
 }
 

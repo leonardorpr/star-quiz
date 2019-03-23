@@ -1,3 +1,4 @@
-import Base from './base';
+import BaseService from './base';
+import GameService from './game';
 
-export { Base };
+export { BaseService, GameService };

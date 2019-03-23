@@ -1,18 +1,4 @@
-import * as R from 'ramda';
+import BaseEntity from './base';
+import GameEntity from './game';
 
-class BaseEntity {
-  constructor(params) {
-    const finalParams = R.merge(this.defaultParams(), params);
-    Object.assign(this, finalParams);
-  }
-
-  defaultParams() {
-    return {};
-  }
-
-  getServiceObject() {
-    return this;
-  }
-}
-
-export default BaseEntity;
+export { BaseEntity, GameEntity };

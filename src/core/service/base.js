@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 class BaseService {
-  static BASE_URL = 'https://api-voadora.dev.tegra.com.br';
+  static BASE_URL = 'https://swapi.co/api';
 
   wrapConfig() {
     const headers = {
@@ -37,12 +37,12 @@ class BaseService {
     });
   }
 
-  async post(url, params) {
+  async getDetails(url) {
     let response;
     let success;
 
     try {
-      response = await axios.post(BaseService.BASE_URL + url, params, this.wrapConfig());
+      response = await axios.get(url, this.wrapConfig());
       success = true;
     } catch (e) {
       response = e.response;
@@ -52,59 +52,7 @@ class BaseService {
     const fatal = !response || response.status >= 500;
     const data = fatal ? null : response.data;
     const headers = fatal ? null : response.headers;
-    const errors = !!response && !!response.data ? response.data : [];
-
-    return this.serviceResponse({
-      fatal,
-      data,
-      headers,
-      success,
-      errors,
-    });
-  }
-
-  async update(url, params) {
-    let response;
-    let success;
-
-    try {
-      response = await axios.patch(BaseService.BASE_URL + url, params, this.wrapConfig());
-      success = true;
-    } catch (e) {
-      response = e.response;
-      success = false;
-    }
-
-    const fatal = !response || response.status >= 500;
-    const data = fatal ? null : response.data;
-    const headers = fatal ? null : response.headers;
-    const errors = !!response && !!response.data ? response.data : [];
-
-    return this.serviceResponse({
-      fatal,
-      data,
-      headers,
-      success,
-      errors,
-    });
-  }
-
-  async destroy(url) {
-    let response;
-    let success;
-
-    try {
-      response = await axios.delete(BaseService.BASE_URL + url, this.wrapConfig());
-      success = true;
-    } catch (e) {
-      response = e.response;
-      success = false;
-    }
-
-    const fatal = !response || response.status >= 500;
-    const data = fatal ? null : response.data;
-    const headers = fatal ? null : response.headers;
-    const errors = !!response && !!response.data ? response.data : [];
+    const errors = !!response && !!response.data.errors ? response.data.errors : [];
 
     return this.serviceResponse({
       fatal,

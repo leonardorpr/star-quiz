@@ -1,3 +1,4 @@
-import Base from './base';
+import BaseRepository from './base';
+import GameRepository from './game';
 
-export { Base };
+export { BaseRepository, GameRepository };
