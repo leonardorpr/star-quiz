@@ -5,7 +5,7 @@ class BaseService {
 
   wrapConfig() {
     const headers = {
-      Accept: 'application/json',
+      'Accept': 'application/json',
     };
 
     return { headers };

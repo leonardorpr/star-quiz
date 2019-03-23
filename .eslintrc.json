@@ -21,7 +21,10 @@
     "no-underscore-dangle": "off",
     "react/prop-types": "off",
     "react/no-unescaped-entities": "off",
-    "react/jsx-one-expression-per-line": "off"
+    "react/jsx-one-expression-per-line": "off",
+    "prefer-destructuring": "off",
+    "react/destructuring-assignment": "off",
+    "quote-props": "off"
   },
   "settings": {
     "import/resolver": {

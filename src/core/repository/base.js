@@ -21,7 +21,7 @@ class BaseRepository {
       return result;
     }
 
-    const entitiesPromises = result.data.map(model => this.modelToEntity(model));
+    const entitiesPromises = result.data.results.map(model => this.modelToEntity(model));
     result.data = await Promise.all(entitiesPromises);
     return result;
   };
@@ -33,7 +33,7 @@ class BaseRepository {
       return result;
     }
 
-    const entitiesPromises = result.data.map(model => this.modelToEntity(model));
+    const entitiesPromises = result.data.results.map(model => this.modelToEntity(model));
     result.data = await Promise.all(entitiesPromises);
     return result;
   };

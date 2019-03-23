@@ -2,7 +2,7 @@ import BaseService from './base';
 
 class GameService extends BaseService {
   async list() {
-    const characters = await this.get('/people');
+    const characters = await this.get('/people/');
 
     return characters;
   }
@@ -14,4 +14,4 @@ class GameService extends BaseService {
   }
 }
 
-export default GameService;
+export default new GameService();
