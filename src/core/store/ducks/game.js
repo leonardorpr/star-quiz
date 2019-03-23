@@ -75,7 +75,7 @@ const resetDetails = (state = INITIAL_STATE) => ({
 // Handlers Score
 const score = (state = INITIAL_STATE, action) => ({
   ...state,
-  score: state.score + action.payload.score,
+  score: state.score + action.score,
 });
 
 const reset = (state = INITIAL_STATE) => ({
