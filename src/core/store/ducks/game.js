@@ -12,6 +12,7 @@ export const { Types, Creators } = createActions({
   resetDetails: [],
   handleScore: ['score'],
   resetScore: [],
+  loadMore: ['nextPage'],
 });
 
 // Handlers
@@ -26,6 +27,7 @@ const INITIAL_STATE = {
   score: 0,
   isPlaying: false,
   error: false,
+  nextPage: '',
 };
 
 // Handlers Characters
@@ -35,7 +37,8 @@ const successCharacters = (state = INITIAL_STATE, action) => ({
   ...state,
   loading: false,
   error: false,
-  characters: [...action.payload.data],
+  characters: action.payload.data,
+  nextPage: action.payload.nextPage,
 });
 
 const failureCharacters = (state = INITIAL_STATE) => ({
@@ -81,6 +84,13 @@ const reset = (state = INITIAL_STATE) => ({
   isPlaying: false,
 });
 
+// Handler Load More
+const loadMore = (state = INITIAL_STATE) => ({
+  ...state,
+  characters: [],
+  loading: true,
+});
+
 // Reducer
 export default createReducer(INITIAL_STATE, {
   [Types.FETCH_CHARACTERS]: characters,
@@ -92,4 +102,5 @@ export default createReducer(INITIAL_STATE, {
   [Types.RESET_DETAILS]: resetDetails,
   [Types.HANDLE_SCORE]: score,
   [Types.RESET_SCORE]: reset,
+  [Types.LOAD_MORE]: loadMore,
 });

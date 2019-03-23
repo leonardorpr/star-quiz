@@ -9,15 +9,29 @@ import { CountDown, Card } from 'components/resource';
 import styles from './styles';
 
 class Game extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      cards: props.game,
+    };
+  }
+
   componentDidMount() {
     this.props.fetchCharacters();
   }
 
-  renderCharacters() {
-    const { game } = this.props;
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.game) {
+      this.setState({ cards: nextProps.game });
+    }
+  }
 
-    if (game.characters) {
-      const characters = game.characters.map((character, index) => (
+  renderCharacters() {
+    const { cards } = this.state;
+
+    if (cards.characters) {
+      const characters = cards.characters.map((character, index) => (
         <div key={index} className="col-sm-12 col-md-4">
           <Card image={character.image} informations={character} />
         </div>
@@ -30,14 +44,21 @@ class Game extends Component {
   }
 
   render() {
-    const { className } = this.props;
+    const { cards } = this.state;
+    const { className, loadMore } = this.props;
 
     return (
       <div className={className}>
         <CountDown />
         <div className="container">
           <div className="row">{this.renderCharacters()}</div>
-          <Button color="warning" size="lg" block className="button-load-more">
+          <Button
+            color="warning"
+            size="lg"
+            block
+            className="button-load-more"
+            onClick={() => loadMore(cards.nextPage)}
+          >
             Load more
           </Button>
         </div>
@@ -50,6 +71,7 @@ const mapStateToProps = ({ game }) => ({ game });
 
 const mapDispatchToProps = dispatch => ({
   fetchCharacters: bindActionCreators(CreatorsGame.fetchCharacters, dispatch),
+  loadMore: bindActionCreators(CreatorsGame.loadMore, dispatch),
 });
 
 export default connect(

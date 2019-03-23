@@ -8,7 +8,10 @@ export function* getCharacters() {
   try {
     const response = yield call(GameRepository.list);
 
-    yield put({ type: Types.SUCCESS_FETCH_CHARACTERS, payload: response });
+    yield put({
+      type: Types.SUCCESS_FETCH_CHARACTERS,
+      payload: { data: response.data, nextPage: response.page },
+    });
   } catch (err) {
     yield put({ type: Types.FAILURE_FETCH_CHARACTERS });
   }
@@ -29,10 +32,13 @@ export function* getDetails(action) {
 
 export function* loadMore(action) {
   try {
-    const response = yield call(GameRepository.more, action.page);
+    const response = yield call(GameRepository.more, action.nextPage);
 
-    yield put({ type: Types.SUCCESS_FETCH_DETAILS, payload: response });
+    yield put({
+      type: Types.SUCCESS_FETCH_CHARACTERS,
+      payload: { data: response.data, nextPage: response.page },
+    });
   } catch (err) {
-    yield put({ type: Types.FAILURE_FETCH_DETAILS });
+    yield put({ type: Types.FAILURE_FETCH_CHARACTERS });
   }
 }
