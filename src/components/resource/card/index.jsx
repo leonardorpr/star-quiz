@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 
 import { Creators as CreatorsGame } from 'core/store/ducks/game';
 
-import { If } from 'util';
+import { If, CharacterImage } from 'util';
 
 import {
   Card, CardImg, CardBody, Button, Input,
@@ -15,11 +15,20 @@ import { Modal } from 'components/resource';
 import styles from './styles';
 
 const GameCard = ({
-  className, image, informations, handleScore,
+  className, informations, handleScore,
 }) => {
   const [toggle, setToggle] = useState(false);
-  const [guess, setGuess] = useState({ field: '', answered: false, openField: false });
+  const [guess, setGuess] = useState({
+    field: '', answered: false, openField: false, image: '',
+  });
   const [tip, setTip] = useState(false);
+
+  const getImage = async () => {
+    const image = await CharacterImage(informations.name);
+    setGuess(prevGuess => ({ ...prevGuess, image }));
+
+    return guess.image;
+  };
 
   const sendGuess = () => {
     setGuess(prevGuess => ({ ...prevGuess, answered: true }));
@@ -55,7 +64,7 @@ const GameCard = ({
     <div className={className}>
       <div className="game-card">
         <Card>
-          <CardImg top width="100%" src={image} alt="Character Image" />
+          <CardImg top width="100%" src={getImage()} alt="Character Image" />
           <CardBody>
             <If test={!guess.answered}>
               <If test={!guess.openField}>
@@ -107,6 +116,7 @@ const GameCard = ({
           open={toggle}
           toggle={() => handleToggle()}
           informations={informations}
+          image={guess.image}
         />
       </div>
     </div>

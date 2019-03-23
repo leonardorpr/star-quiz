@@ -67,7 +67,7 @@ class GameModal extends Component {
 
   render() {
     const {
-      className, open, toggle, additionalClassName,
+      className, open, toggle, additionalClassName, image,
     } = this.props;
 
     return (
@@ -82,7 +82,7 @@ class GameModal extends Component {
           <ModalBody>
             <div>
               <img
-                src="https://cdn1.newsplex.pt/media/2018/12/4/668548.jpg?type=artigo"
+                src={image}
                 alt="Character Images"
                 style={{ height: 200, width: '100%' }}
               />
