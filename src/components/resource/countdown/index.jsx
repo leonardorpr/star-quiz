@@ -16,7 +16,7 @@ const Countdown = ({ className }) => {
           <MaterialIcon icon="timer" size={35} color="#000" />
           <h3 className="float-right ml-2">
             <Timer
-              date={Date.now() + 1000}
+              date={Date.now() + 120000}
               renderer={({ minutes, seconds }) => (
                 <span>
                   {minutes}:{seconds}

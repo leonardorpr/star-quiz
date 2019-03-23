@@ -30,6 +30,8 @@ const GameOver = ({
       return;
     }
 
+    setForm(prevForm => ({ ...prevForm, required: false }));
+
     Persistence.setLocalStorage('ranking', {
       email: form.email,
       name: form.name,
