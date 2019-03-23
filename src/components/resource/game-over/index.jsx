@@ -12,6 +12,8 @@ import {
   Input,
 } from 'reactstrap';
 
+import { If } from 'util';
+
 const GameOver = ({
   className,
   open,
@@ -20,14 +22,19 @@ const GameOver = ({
   redirectTo,
   game,
 }) => {
-  const [form, setForm] = useState({ email: '', name: '' });
+  const [form, setForm] = useState({ email: '', name: '', required: false });
 
   const redirectToRankingPage = () => {
+    if (form.name.length <= 0) {
+      setForm(prevForm => ({ ...prevForm, required: true }));
+      return;
+    }
+
     toggle();
     redirectTo('/ranking');
   };
 
-  const handleFieldChange = (key, value) => setForm(prevGuess => ({ ...prevGuess, [key]: value }));
+  const handleFieldChange = (key, value) => setForm(prevForm => ({ ...prevForm, [key]: value }));
 
   return (
     <div className={className}>
@@ -75,6 +82,18 @@ const GameOver = ({
                 value={form.email}
               />
             </div>
+            <If test={form.required}>
+              <p
+                style={{
+                  marginTop: 10,
+                  textAlign: 'center',
+                  fontSize: 15,
+                  color: 'red',
+                }}
+              >
+                Name is required!
+              </p>
+            </If>
           </div>
         </ModalBody>
         <ModalFooter>
