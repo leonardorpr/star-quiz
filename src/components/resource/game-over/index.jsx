@@ -12,7 +12,7 @@ import {
   Input,
 } from 'reactstrap';
 
-import { If } from 'util';
+import { If, Persistence } from 'util';
 
 const GameOver = ({
   className,
@@ -29,6 +29,12 @@ const GameOver = ({
       setForm(prevForm => ({ ...prevForm, required: true }));
       return;
     }
+
+    Persistence.setLocalStorage('ranking', {
+      email: form.email,
+      name: form.name,
+      score: game.score,
+    });
 
     toggle();
     redirectTo('/ranking');
