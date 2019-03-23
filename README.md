@@ -15,28 +15,22 @@ open your browser [http://localhost:3000](http://localhost:3000)
 
 ```
 - axios                         // web requests / ajax
-- @material-ui/core             // UI framework
-- @material-ui/styles           // styled-components on materila-ui
-- big.js                        // calculate
+- reactstrap                    // UI framework
+- google-images                 // collect imagens of google
 - connected-react-router        // connect redux with react router
 - history                       // access browser history
-- moment                        // manipulate dates
 - prop-types                    // check type of props
 - ramda                         // utilities
 - react                         // core
 - react-dom                     // core
-- react-flexbox-grid            // grid system
 - react-intl                    // internationalization
 - react-redux                   // manage global state
 - react-router-dom              // routes
-- react-table                   // facilitates creation of tables
 - redux                         // manage global state
 - redux-saga                    // manage side effects
 - reduxsauce                    // Redux pattern
 - redux-logger                  // redux logs
 - styled-components             // create style based CSS-IN-JS
-- uppy                          // file uploader
-- validate.js                   // validations
 ```
 
 ## Structure
