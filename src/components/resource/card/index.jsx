@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -26,9 +26,11 @@ const GameCard = ({
   const getImage = async () => {
     const image = await CharacterImage(informations.name);
     setGuess(prevGuess => ({ ...prevGuess, image }));
-
-    return guess.image;
   };
+
+  useEffect(() => {
+    getImage();
+  });
 
   const sendGuess = () => {
     setGuess(prevGuess => ({ ...prevGuess, answered: true }));
@@ -64,7 +66,7 @@ const GameCard = ({
     <div className={className}>
       <div className="game-card">
         <Card>
-          <CardImg top width="100%" src={getImage()} alt="Character Image" />
+          <CardImg top width="100%" height="200px" src={guess.image} alt="Character Image" />
           <CardBody>
             <If test={!guess.answered}>
               <If test={!guess.openField}>
